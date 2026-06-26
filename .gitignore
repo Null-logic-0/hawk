@@ -1,0 +1,26 @@
+hawk.conf
+*.conf
+
+# Logs
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+.zed/
+.rubymine/
+*.swp
+*.swo
+
+
+# Environment files
+.env
+.env.*
+
+# SSH keys (if someone drops one in the project)
+*.pem
+*.key

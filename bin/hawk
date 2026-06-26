@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "hawk v0.1.0"
