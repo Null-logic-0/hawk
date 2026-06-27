@@ -17,6 +17,7 @@ cmd_init() {
     read -rp "  App name: " APP_NAME
     read -rp "  Server host: " SERVER_HOST
     read -rp "  Server user: " SERVER_USER
+    read -rp "  Git repo: " GIT_REPO
 
     cp "${HAWK_ROOT}/templates/hawk.conf.example" hawk.conf
 
@@ -24,6 +25,7 @@ cmd_init() {
         -e "s|__APP_NAME__|${APP_NAME}|g" \
         -e "s|__SERVER_HOST__|${SERVER_HOST}|g" \
         -e "s|__SERVER_USER__|${SERVER_USER}|g" \
+        -e "s|__GIT_REPO__|${GIT_REPO}|g" \
         hawk.conf
 
     rm -f hawk.conf.bak

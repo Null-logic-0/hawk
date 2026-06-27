@@ -32,7 +32,7 @@ config_load() {
 
 config_validate() {
     local errors=0
-    for field in APP_NAME SERVER_HOST SERVER_USER; do
+    for field in APP_NAME SERVER_HOST SERVER_USER GIT_REPO; do
         if [[ -z "${!field:-}" ]]; then
             log_error "Missing required config field: ${field}"
             errors=$((errors + 1))
@@ -50,6 +50,7 @@ config_show() {
     print_info "SERVER_PORT: ${SERVER_PORT:-}"
     print_info "SERVER_USER: ${SERVER_USER:-}"
     print_info "GIT_BRANCH: ${GIT_BRANCH:-}"
+    print_info "GIT_REPO: ${GIT_REPO:-}"
     print_info "APP_ENV: ${APP_ENV:-}"
     print_info "RELEASES_TO_KEEP: ${RELEASES_TO_KEEP:-}"
     print_info "BACKUP_PATH: ${BACKUP_PATH:-}"

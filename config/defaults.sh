@@ -4,6 +4,7 @@ set -euo pipefail
 HAWK_DEFAULTS_LOADED=1
 
 
+# GIT_REPO — required, no default
 
 DEPLOY_PATH="${DEPLOY_PATH:-/var/www/app}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
