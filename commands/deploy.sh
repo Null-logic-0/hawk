@@ -2,10 +2,6 @@
 # shellcheck disable=SC1091
 set -euo pipefail
 
-source "${HAWK_ROOT}/lib/colors.sh"
-source "${HAWK_ROOT}/lib/log.sh"
-source "${HAWK_ROOT}/lib/config.sh"
-source "${HAWK_ROOT}/lib/ssh.sh"
 
 _deploy_build_release() {
     local release_path="$1"

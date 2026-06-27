@@ -2,8 +2,6 @@
 # shellcheck disable=SC1091
 set -euo pipefail
 
-source "${HAWK_ROOT}/lib/colors.sh"
-source "${HAWK_ROOT}/lib/log.sh"
 
 cmd_init() {
     log_setup

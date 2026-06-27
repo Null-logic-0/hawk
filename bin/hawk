@@ -3,13 +3,19 @@
 set -euo pipefail
 
 if [[ "${BASH_VERSINFO[0]}" -lt 4 ]]; then
-  echo "hawk requires bash >= 4. Found: ${BASH_VERSION}" >&2
-  echo "On macOS: brew install bash" >&2
-  exit 1
+    echo "hawk requires bash >= 4. Found: ${BASH_VERSION}" >&2
+    echo "On macOS: brew install bash" >&2
+    exit 1
 fi
 
 HAWK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HAWK_VERSION="0.1.0"
+
+source "${HAWK_ROOT}/lib/colors.sh"
+source "${HAWK_ROOT}/lib/log.sh"
+source "${HAWK_ROOT}/config/defaults.sh"
+source "${HAWK_ROOT}/lib/config.sh"
+source "${HAWK_ROOT}/lib/ssh.sh"
 
 hawk_usage() {
     echo "Usage: hawk <command> [options]"
@@ -49,7 +55,7 @@ case "$hawk_command" in
         source "${HAWK_ROOT}/commands/status.sh"
         ;;
     logs)
-        source "${HAWK_ROOT}/commands/logs.sh"
+        source "${HAWK_ROOT}/commands/logs.sh" "${@:2}"
         ;;
     rollback)
         source "${HAWK_ROOT}/commands/rollback.sh"
