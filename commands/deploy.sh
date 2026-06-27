@@ -7,6 +7,20 @@ source "${HAWK_ROOT}/lib/log.sh"
 source "${HAWK_ROOT}/lib/config.sh"
 source "${HAWK_ROOT}/lib/ssh.sh"
 
+_deploy_build_release() {
+    local release_path="$1"
+    print_step "Building Mix release..."
+    ssh_run "cd ${release_path} && MIX_ENV=prod mix deps.get --only prod && MIX_ENV=prod mix compile && MIX_ENV=prod mix release"
+    log_success "Mix Release built: ${release_path}"
+}
+
+
+_deploy_migrate() {
+    local release_path="$1"
+    print_step "Running migrations..."
+    ssh_run "${release_path}/_build/prod/rel/${APP_NAME}/bin/${APP_NAME} eval '${RELEASE_MODULE}.Release.migrate()'"
+    log_success "Migrations completed: ${release_path}"
+}
 
 _deploy_pull_code() {
     local release_path="$1"
