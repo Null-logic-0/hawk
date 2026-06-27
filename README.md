@@ -133,29 +133,13 @@ hawk logs
 
 ## Configuration
 
-hawk reads configuration from `hawk.conf` in the current directory or a parent directory. Generate it with:
+hawk reads deployment settings from `hawk.conf` in the current directory or a parent directory. Generate one with:
 
 ```bash
 hawk init
 ```
 
-| Key | Default | Description |
-| --- | --- | --- |
-| `APP_NAME` | Required | Phoenix release and systemd service name. |
-| `SERVER_HOST` | Required | Hostname or IP address of the deployment server. |
-| `SERVER_USER` | Required | SSH user used for deploys. |
-| `SERVER_PORT` | `22` | SSH port. |
-| `DEPLOY_PATH` | `/var/www/app` | Base directory on the server. Releases live under `DEPLOY_PATH/releases`, and `DEPLOY_PATH/current` points at the active release. |
-| `GIT_BRANCH` | `main` | Git branch cloned during deploy. |
-| `GIT_REPO` | Required | Git repository URL the server can clone. |
-| `APP_ENV` | `production` | Application environment value stored in config. |
-| `RELEASES_TO_KEEP` | `5` | Number of old releases kept after each deploy. |
-| `RELEASE_MODULE` | Required | Elixir module used for release tasks, for example `MyApp`. hawk calls `MyApp.Release.migrate()`. |
-| `BACKUP_PATH` | `/var/backups/hawk` | Base directory for timestamped backups. |
-| `DB_USER` | Required | PostgreSQL user for backup and restore commands. |
-| `DB_NAME` | Required | PostgreSQL database name for backup and restore commands. |
-
-Example:
+Minimal example:
 
 ```bash
 APP_NAME=my_app
@@ -172,6 +156,18 @@ BACKUP_PATH=/var/backups/my_app
 DB_USER=my_app
 DB_NAME=my_app_prod
 ```
+
+Required fields:
+
+- `APP_NAME`
+- `SERVER_HOST`
+- `SERVER_USER`
+- `GIT_REPO`
+- `DB_USER`
+- `DB_NAME`
+- `RELEASE_MODULE`
+
+For every config key, defaults, path layout, release module setup, Git access, and backup behavior, see [docs/configuration.md](docs/configuration.md).
 
 ## Commands
 
