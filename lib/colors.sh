@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 
 set -euo pipefail
+
+[[ -n "${HAWK_COLORS_LOADED:-}" ]] && return 0
+HAWK_COLORS_LOADED=1
+
 
 # Color constants
 
@@ -35,20 +40,13 @@ print_error() {
 }
 
 print_warning() {
-    echo -e "${YELLOW}  [⚠] ${1}${RESET}"
+    echo -e "${YELLOW}  [!] ${1}${RESET}"
 }
 
 print_info() {
-    echo -e "${CYAN}  [ℹ] ${1}${RESET}"
+    echo -e "${CYAN}  [i] ${1}${RESET}"
 }
 
 print_step() {
-    echo -e "${BLUE}  [▶] ${1}${RESET}"
+    echo -e "${BLUE}  [→] ${1}${RESET}"
 }
-
-
-# print_success "Deployment complete"
-# print_error "Connection failed"
-# print_warning "Server is slow"
-# print_info "Using config: hawk.conf"
-# print_step "Pulling latest code"
