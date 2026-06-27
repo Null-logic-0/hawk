@@ -10,7 +10,11 @@
 
 ## Demo Video
 
-Coming soon.
+
+
+https://github.com/user-attachments/assets/8d845d08-57f6-4e6e-b027-3df6420a54c3
+
+
 
 ## Why hawk?
 
