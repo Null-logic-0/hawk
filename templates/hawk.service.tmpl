@@ -1,0 +1,20 @@
+[Unit]
+Description=__APP_NAME__ Phoenix application
+After=network.target postgresql.service
+
+[Service]
+Type=exec
+User=__SERVER_USER__
+WorkingDirectory=__DEPLOY_PATH__/current
+ExecStart=__DEPLOY_PATH__/current/_build/prod/rel/__APP_NAME__/bin/__APP_NAME__ start
+ExecStop=__DEPLOY_PATH__/current/_build/prod/rel/__APP_NAME__/bin/__APP_NAME__ stop
+Restart=on-failure
+RestartSec=5
+Environment=MIX_ENV=prod
+Environment=PORT=4000
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=__APP_NAME__
+
+[Install]
+WantedBy=multi-user.target
