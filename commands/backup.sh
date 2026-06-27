@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2153
 set -euo pipefail
 
 source "${HAWK_ROOT}/lib/colors.sh"
@@ -35,7 +35,6 @@ cmd_backup() {
     local backup_timestamp
     backup_timestamp="$(date '+%Y%m%d%H%M%S')"
 
-    # shellcheck disable=SC2153  # BACKUP_PATH is a config variable
     local backup_path="${BACKUP_PATH}/${backup_timestamp}"
 
     log_info "Starting backup of ${APP_NAME}..."
