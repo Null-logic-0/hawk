@@ -22,6 +22,37 @@ _deploy_migrate() {
     log_success "Migrations completed: ${release_path}"
 }
 
+
+_deploy_symlink() {
+    local release_path="$1"
+    print_step "Updating current symlink..."
+    ssh_run "ln -sfn ${release_path} ${DEPLOY_PATH}/current"
+    log_success "Symlink created: ${release_path}"
+}
+
+
+_deploy_restart() {
+    print_step "Restarting service..."
+    ssh_run_sudo "systemctl restart ${APP_NAME}"
+    log_success "Service restarted: ${APP_NAME}"
+}
+
+
+_deploy_healthcheck() {
+    print_step "Running healthcheck..."
+    ssh_run "sleep 3"
+    if ! ssh_run "systemctl is-active ${APP_NAME}" &>/dev/null; then
+       log_fatal "Health check failed - ${APP_NAME} is not running"
+    fi
+    log_success "Service is healthy"
+}
+
+_deploy_cleanup() {
+    print_step "Cleaning up old releases..."
+    ssh_run "ls -1t ${DEPLOY_PATH}/releases | tail -n +$((RELEASES_TO_KEEP + 1)) | xargs -I {} rm -rf ${DEPLOY_PATH}/releases/{}"
+    log_success "Old releases removed, keeping last ${RELEASES_TO_KEEP}"
+}
+
 _deploy_pull_code() {
     local release_path="$1"
     print_step "Cloning repository..."
