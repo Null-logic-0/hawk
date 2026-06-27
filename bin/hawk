@@ -1,3 +1,65 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
+set -euo pipefail
 
-echo "hawk v0.1.0"
+HAWK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+HAWK_VERSION="0.1.0"
+
+hawk_usage() {
+    echo "Usage: hawk <command> [options]"
+    echo ""
+    echo "Commands:"
+    echo ""
+    echo "  init        Set up hawk configuration for a new project"
+    echo "  deploy      Deploy the latest release to your server"
+    echo "  status      Show the deployment status of your project"
+    echo "  logs        Show the deployment logs"
+    echo "  rollback    Roll back to the previous release"
+    echo "  doctor      Run a diagnostic check on your deployment"
+    echo "  backup      Create a backup of your deployment"
+    echo "  restore     Restore a backup of your deployment"
+    echo ""
+    echo "Options:"
+    echo "  Run 'hawk <command> --help' for more information on a command."
+    echo ""
+}
+
+hawk_command="${1:-help}"
+
+case "$hawk_command" in
+    help|--help|-h)
+        hawk_usage
+        ;;
+    version|--version|-v)
+        echo "hawk v${HAWK_VERSION}"
+        ;;
+    init)
+        source "${HAWK_ROOT}/commands/init.sh"
+        ;;
+    deploy)
+        source "${HAWK_ROOT}/commands/deploy.sh"
+        ;;
+    status)
+        source "${HAWK_ROOT}/commands/status.sh"
+        ;;
+    logs)
+        source "${HAWK_ROOT}/commands/logs.sh"
+        ;;
+    rollback)
+        source "${HAWK_ROOT}/commands/rollback.sh"
+        ;;
+    doctor)
+        source "${HAWK_ROOT}/commands/doctor.sh"
+        ;;
+    backup)
+        source "${HAWK_ROOT}/commands/backup.sh"
+        ;;
+    restore)
+        source "${HAWK_ROOT}/commands/restore.sh"
+        ;;
+    *)
+        echo "hawk: unknown command '${hawk_command}'" >&2
+        echo "Run 'hawk --help' for usage." >&2
+        exit 1
+        ;;
+esac
