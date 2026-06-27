@@ -17,10 +17,9 @@ _ssh_opts() {
 ssh_run() {
     local remote_command="$1"
     _ssh_opts
-    log_info "Running command: ${remote_command}"
-
+    log_info "Running command: ${remote_command}" >&2
     ssh "${SSH_OPTS[@]}" "${SERVER_USER}@${SERVER_HOST}" "${remote_command}"
-    log_info "Command completed"
+    log_info "Command completed" >&2
 }
 
 ssh_test() {
@@ -32,7 +31,6 @@ ssh_test() {
         log_fatal "Cannot connect to ${SERVER_HOST}"
     fi
 }
-
 
 ssh_upload() {
     local local_file="$1"
@@ -49,7 +47,7 @@ ssh_upload() {
 ssh_run_sudo() {
     local remote_command="$1"
     _ssh_opts
-    log_info "Running sudo command: ${remote_command}"
+    log_info "Running sudo command: ${remote_command}" >&2
     ssh "${SSH_OPTS[@]}" "${SERVER_USER}@${SERVER_HOST}" "sudo ${remote_command}"
-    log_info "Command completed"
+    log_info "Command completed" >&2
 }
