@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2034
 
 set -euo pipefail
 
@@ -15,7 +15,6 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 
-# shellcheck disable=SC2034 # BOLD is a public constant, used by sourcing scripts
 BOLD='\033[1m'
 RESET='\033[0m'
 
@@ -26,7 +25,6 @@ if [[ -n "${NO_COLOR:-}" ]]; then
     BLUE=''
     CYAN=''
 
-    # shellcheck disable=SC2034
     BOLD=''
     RESET=''
 fi
