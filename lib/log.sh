@@ -23,5 +23,3 @@ log_success() { print_success "${1}"; echo "[$(date '+%Y-%m-%d %H:%M:%S')] SUCCE
 log_warning() { print_warning "${1}"; echo "[$(date '+%Y-%m-%d %H:%M:%S')] WARNING ${1}" >> "${HAWK_LOG_FILE}"; }
 log_error()   { print_error "${1}" >&2; echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR   ${1}" >> "${HAWK_LOG_FILE}"; }
 log_fatal()   { print_error "${1}" >&2; echo "[$(date '+%Y-%m-%d %H:%M:%S')] FATAL   ${1}" >> "${HAWK_LOG_FILE}"; exit 1; }
-
-shellcheck -x: no issues
