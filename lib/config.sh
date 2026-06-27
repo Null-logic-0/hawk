@@ -32,7 +32,7 @@ config_load() {
 
 config_validate() {
     local errors=0
-    for field in APP_NAME SERVER_HOST SERVER_USER GIT_REPO RELEASE_MODULE; do
+    for field in APP_NAME SERVER_HOST SERVER_USER GIT_REPO DB_USER DB_NAME RELEASE_MODULE; do
         if [[ -z "${!field:-}" ]]; then
             log_error "Missing required config field: ${field}"
             errors=$((errors + 1))
@@ -51,6 +51,8 @@ config_show() {
     print_info "SERVER_USER: ${SERVER_USER:-}"
     print_info "GIT_BRANCH: ${GIT_BRANCH:-}"
     print_info "GIT_REPO: ${GIT_REPO:-}"
+    print_info "DB_USER: ${DB_USER:-}"
+    print_info "DB_NAME: ${DB_NAME:-}"
     print_info "RELEASE_MODULE: ${RELEASE_MODULE:-}"
     print_info "APP_ENV: ${APP_ENV:-}"
     print_info "RELEASES_TO_KEEP: ${RELEASES_TO_KEEP:-}"

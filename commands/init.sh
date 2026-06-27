@@ -18,6 +18,8 @@ cmd_init() {
     read -rp "  Server host: " SERVER_HOST
     read -rp "  Server user: " SERVER_USER
     read -rp "  Git repo: " GIT_REPO
+    read -rp "  DB user: " DB_USER
+    read -rp "  DB name: " DB_NAME
     read -rp "  Release module: " RELEASE_MODULE
 
     cp "${HAWK_ROOT}/templates/hawk.conf.example" hawk.conf
@@ -27,6 +29,8 @@ cmd_init() {
         -e "s|__SERVER_HOST__|${SERVER_HOST}|g" \
         -e "s|__SERVER_USER__|${SERVER_USER}|g" \
         -e "s|__GIT_REPO__|${GIT_REPO}|g" \
+        -e "s|__DB_USER__|${DB_USER}|g" \
+        -e "s|__DB_NAME__|${DB_NAME}|g" \
         -e "s|__RELEASE_MODULE__|${RELEASE_MODULE}|g" \
         hawk.conf
 
